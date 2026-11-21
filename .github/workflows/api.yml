@@ -11,8 +11,8 @@ jobs:
       - uses: google-github-actions/auth@v2
         with:
           project_id: reachly-515412
-          workload_identity_provider: ${{ secrets.GCP_WIF_PROVIDER }}
-          service_account: ${{ secrets.GCP_SA }}
+          workload_identity_provider: projects/1051995740961/locations/global/workloadIdentityPools/github/providers/repo
+          service_account: deployer@reachly-515412.iam.gserviceaccount.com
       - uses: google-github-actions/deploy-cloudrun@v2
         with:
           project_id: reachly-515412
@@ -22,7 +22,7 @@ jobs:
           flags: --allow-unauthenticated
           env_vars: SITE_URL=${{ vars.SITE_URL }},API_URL=${{ vars.API_URL }},PAYU_URL=https://test.payu.in/_payment
           secrets: |
-            PAYU_KEY=HcZiCX:latest
-            PAYU_SALT=BUd8KXeBqfzKhltSpsCEqYqiEQiO7sbh:latest
+            PAYU_KEY='HcZiCX':latest
+            PAYU_SALT='BUd8KXeBqfzKhltSpsCEqYqiEQiO7sbh':latest
             JWT_SECRET=JWT_SECRET:latest
             ANTHROPIC_API_KEY=ANTHROPIC_API_KEY:latest
