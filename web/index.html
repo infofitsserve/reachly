@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Reachly — Your 24/7 AI Outreach Agent</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Fraunces:wght@600;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#F6F5F3;--ink:#16181D;--mut:#5d616b;--card:#fff;--line:#e4e1db;--ac:#1F7A5C;--acf:#fff;--soft:#E3F1EB;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#101312;--ink:#F1F0EC;--mut:#a3a7a2;--card:#191d1b;--line:#2b312e;--ac:#4CC9A0;--acf:#08150f;--soft:#14261f}}
+:root[data-theme="dark"]{--bg:#101312;--ink:#F1F0EC;--mut:#a3a7a2;--card:#191d1b;--line:#2b312e;--ac:#4CC9A0;--acf:#08150f;--soft:#14261f}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:70px}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,Arial,sans-serif;line-height:1.55}
+h1,h2,h3{font-family:Fraunces,Georgia,serif;margin:0;line-height:1.1}
+.w{max-width:1080px;margin:0 auto;padding:0 20px}
+header{position:sticky;top:0;z-index:20;background:var(--bg);border-bottom:1px solid var(--line);padding-top:env(safe-area-inset-top,0px)}
+header .w{display:flex;align-items:center;justify-content:space-between;height:58px}
+.logo{font:800 22px Fraunces,Georgia,serif;color:var(--ink);text-decoration:none}.logo b{color:var(--ac)}
+nav a{color:var(--mut);text-decoration:none;margin-left:20px;font-size:14px;font-weight:600}
+.btn{display:inline-block;background:var(--ac);color:var(--acf);border:0;border-radius:10px;padding:13px 22px;font:800 15px Inter,sans-serif;cursor:pointer;text-decoration:none}
+.btn.o{background:none;color:var(--ink);border:1.5px solid var(--line)}
+.hero{text-align:center;padding:64px 0 40px}
+.pill{display:inline-block;background:var(--soft);color:var(--ac);font-weight:800;font-size:13px;padding:6px 14px;border-radius:99px}
+.hero h1{font-size:clamp(36px,6.4vw,66px);margin:18px auto 14px;max-width:16ch}
+.hero p.s{max-width:56ch;margin:0 auto 26px;color:var(--mut);font-size:18px}
+.f{display:flex;gap:10px;max-width:560px;margin:0 auto;flex-wrap:wrap}
+.f input{flex:1 1 260px;padding:14px 16px;border-radius:10px;border:1.5px solid var(--line);background:var(--card);color:var(--ink);font:16px Inter,sans-serif}
+.note{font-size:13px;color:var(--mut);margin-top:12px}.note a{color:var(--ac);font-weight:600}
+.bar{display:flex;flex-wrap:wrap;justify-content:center;gap:12px 40px;padding:26px 0;border-block:1px solid var(--line);margin-top:30px}
+.bar div{text-align:center;font-size:13px;color:var(--mut)}.bar b{display:block;font:800 28px Fraunces,Georgia,serif;color:var(--ink)}
+section{padding:68px 0 0}section>.w>h2,.h{font-size:clamp(28px,4.4vw,42px);text-align:center;margin-bottom:10px}
+.sub{text-align:center;color:var(--mut);max-width:58ch;margin:0 auto 32px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px}
+.g3{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+#demo{display:none;margin-top:30px;text-align:left}#demo.on{display:block}
+.st{display:flex;align-items:center;gap:10px;padding:9px 0;color:var(--mut);font-size:15px;opacity:.35;transition:.4s}.st.d{opacity:1;color:var(--ink)}.st:before{content:"○";color:var(--ac)}.st.d:before{content:"✓"}
+.res{display:none;gap:16px;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));margin-top:14px}.res.on{display:grid}
+table{width:100%;border-collapse:collapse;font-size:14px}td,th{padding:8px 4px;border-bottom:1px solid var(--line);text-align:left}
+.meter{height:8px;border-radius:9px;background:var(--line);overflow:hidden;min-width:60px}.meter i{display:block;height:100%;background:var(--ac)}
+.mail{font-size:14px;white-space:pre-line}
+.step{display:grid;gap:18px;grid-template-columns:1fr 1fr;align-items:center;margin-bottom:18px}.step:nth-child(even)>div:first-child{order:2}
+.step h3{font-size:26px;margin-bottom:8px}.step p{color:var(--mut);margin:0}.num{color:var(--ac);font-weight:800;font-size:13px;letter-spacing:.08em}
+.chat{display:flex;flex-direction:column;gap:8px;font-size:14px}.chat span{padding:9px 12px;border-radius:12px;max-width:85%;background:var(--soft)}.chat .me{align-self:flex-end;background:var(--ac);color:var(--acf)}
+.ft{font:800 17px Fraunces,Georgia,serif;margin-bottom:6px}.card p{margin:0;color:var(--mut);font-size:15px}
+.big{font:800 44px Fraunces,Georgia,serif;color:var(--ac)}
+.price{max-width:640px;margin:0 auto;text-align:center}.price input{width:100%;accent-color:var(--ac);margin:14px 0}
+.pg{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:14px 0 20px}.pg b{display:block;font:800 26px Fraunces,Georgia,serif}.pg span{font-size:12px;color:var(--mut)}
+.q{font-size:15px}.q b{display:block;margin-top:14px}.q span{color:var(--mut);font-size:13px}
+details{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin-bottom:10px;max-width:760px;margin-inline:auto}
+summary{cursor:pointer;font-weight:700}details p{color:var(--mut);margin:10px 0 0}
+.cta{background:var(--ac);color:var(--acf);border-radius:24px;text-align:center;padding:54px 20px;margin-top:68px}.cta h2{font-size:clamp(28px,4.4vw,44px);margin-bottom:10px}.cta .btn{background:var(--acf);color:var(--ac);margin-top:18px}
+footer{padding:36px 0 90px;color:var(--mut);font-size:13px;display:flex;flex-wrap:wrap;gap:10px 24px;justify-content:space-between}
+.stick{display:none;position:fixed;left:0;right:0;bottom:0;background:var(--bg);border-top:1px solid var(--line);padding:10px 16px calc(10px + env(safe-area-inset-bottom,0px));z-index:30}.stick .btn{width:100%;text-align:center}
+@media(max-width:760px){nav{display:none}.step{grid-template-columns:1fr}.step:nth-child(even)>div:first-child{order:0}.stick{display:block}}
+.col{display:grid;gap:14px;margin-top:16px}.tg{display:inline-block;font-size:12px;font-weight:800;color:var(--ac);background:var(--soft);padding:3px 9px;border-radius:99px}.tl{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:10px 0}.tl .tg.on{background:var(--ac);color:var(--acf)}.tl .tg.x{opacity:.4;text-decoration:line-through}textarea{width:100%;padding:12px 14px;border-radius:10px;border:1.5px solid var(--line);background:var(--card);color:var(--ink);font:15px Inter,sans-serif;min-height:80px}.sm{padding:7px 12px;font-size:13px}.tr{display:flex;flex-direction:column;gap:8px}.tr div{padding:10px 12px;border-radius:12px;font-size:14px;max-width:88%;background:var(--soft)}.tr .p{align-self:flex-end;background:var(--card);border:1px solid var(--line)}.warn{font-size:13px;color:var(--mut);border-left:3px solid var(--ac);padding-left:12px;margin-top:14px}.in{padding:13px;border-radius:10px;border:1.5px solid var(--line);background:var(--card);color:var(--ink);font:16px Inter,sans-serif}</style></head><body>
+<header><div class="w"><a class="logo" href="#">Reach<b>ly</b></a><nav><a href="#studio">Campaign Studio</a><a href="#how">How it works</a><a href="#proof">Results</a><a href="#pricing">Pricing</a><a href="#faq">FAQ</a></nav><span><a href='#login' style='color:var(--ink);font-weight:600;font-size:14px;text-decoration:none;margin-right:14px'>Log in</a><a class='btn' href='#signup' style='padding:9px 16px'>Start free trial</a></span></div></header>
+
+<main><div class="w">
+<div class="hero" id="top"><span class="pill">● AI outreach agent · early access</span>
+<h1>Get your first hot leads in 24 hours</h1>
+<p class="s">Enter your website. Our AI agent learns what you sell, finds the right buyers, writes personal emails, follows up and books the meeting. No SDRs. No email setup.</p>
+<form class="f" id="fm"><input id="dom" type="text" placeholder="yourcompany.com" aria-label="Your website" autocomplete="url"><input id="desc" type="text" placeholder="What do you sell? (optional, makes results sharper)" aria-label="What you sell" style="flex:1 1 100%"><button class="btn" type="submit" id="go">Find my leads</button></form>
+<p class="note">Free preview, no card needed · <a href="#" id="nosite">I don't have a website</a></p>
+<div id="demo" class="card"><h3 style="font-size:22px;margin-bottom:8px">Agent preview for <span id="dn"></span></h3>
+<div id="steps"></div>
+<div class="res" id="res">
+<div class="card"><div class="ft">Who is most likely to buy</div><table id="fit"></table></div>
+<div class="card"><div class="ft">Sample first email</div><div class="mail" id="em"></div></div>
+<div class="card" style="grid-column:1/-1;text-align:center"><b>AI-generated preview.</b> Join early access to run campaigns on your own leads.<br><br>
+<form class="f" id="lead"><input id="em2" type="email" required placeholder="you@company.com" aria-label="Work email"><button class="btn" type="submit">Join early access</button></form><p class="note" id="ok"></p></div>
+</div></div>
+<div class="bar"><div><b>Free</b>AI preview</div><div><b>24/7</b>automation</div><div><b>AI</b>written emails</div><div><b>1-click</b>booking links</div></div>
+</div>
+
+<section id="studio"><div class="w"><h2>Campaign Studio</h2><p class="sub">Describe your product. The AI builds your buyer profiles, an email follow-up sequence that runs until the lead converts, and an AI sales-call script, then rehearses a full call.</p>
+<div class="card"><div class="col" style="margin:0"><input class="in" id="sp" placeholder="Product or service name" aria-label="Product name"><textarea id="sd" placeholder="What do you sell, price, and who is it for? Example: Handmade soy candles, ₹499, for gift shops and wedding planners in India." aria-label="Product description"></textarea><input class="in" id="bk" placeholder="Booking or order link (optional)" aria-label="Booking link"><button class="btn" id="bc" type="button">Build my campaign</button></div><p class="warn">This studio creates and rehearses your campaign. Actually sending the emails and placing the calls needs your own email-sending and calling accounts, and permission to contact each person: consent or a lawful basis, an unsubscribe link, and compliance with do-not-call rules (for example TRAI DND in India, TCPA in the US, GDPR in Europe). Calls by an AI should say they are AI.</p></div>
+<div id="co"></div></div></section>
+<section id="how"><div class="w"><h2>We run the entire pipeline</h2><p class="sub">Six steps, fully automated, working while you sleep.</p>
+<div class="card step"><div><span class="num">STEP 1</span><h3>Learns what you sell</h3><p>Reads your site, studies competitors and builds a clear picture of your offer.</p></div><div class="mail">Your site → "Wholesale silk flowers for hotels, restaurants & florists"
+Competitors scanned: 5</div></div>
+<div class="card step"><div><span class="num">STEP 2</span><h3>Figures out who buys it</h3><p>Ranks customer segments by fit so budget goes where it converts.</p></div><div><table><tr><td>Event designers</td><td>92%</td></tr><tr><td>Wedding studios</td><td>88%</td></tr><tr><td>Boutique hotels</td><td>74%</td></tr></table></div></div>
+<div class="card step"><div><span class="num">STEP 3</span><h3>Finds those exact people</h3><p>Verified decision makers filtered by role, industry, size and location.</p></div><div class="chat"><span>R. Whitfield · Owner</span><span>D. Okafor · Lead Designer</span><span>M. Castellanos · Founder</span></div></div>
+<div class="card step"><div><span class="num">STEP 4</span><h3>Writes each a personal email</h3><p>Researches every company and writes in the lead's language, with follow-ups.</p></div><div class="mail card" style="background:var(--bg)">Subject: Quick idea for your next event
+Hi Rachel, saw your recent installs...</div></div>
+<div class="card step"><div><span class="num">STEP 5</span><h3>Handles replies, books meetings</h3><p>Answers questions and sends your booking link the moment someone is interested.</p></div><div class="chat"><span>Can you do Tuesday 2pm?</span><span class="me">Booked. Invite sent ✓</span></div></div>
+<div class="card step"><div><span class="num">STEP 6</span><h3>Learns what works</h3><p>Scales winning campaigns, pauses weak ones, keeps cost per lead low.</p></div><div><table><tr><td>Segment A</td><td>Scaling</td></tr><tr><td>Segment B</td><td>Working</td></tr><tr><td>Segment C</td><td>Paused</td></tr></table></div></div>
+</div></section>
+
+<section><div class="w"><h2>Three things that set us apart</h2><p class="sub"></p>
+<div class="g3"><div class="card"><div class="big">Fit-first</div><div class="ft">Smart targeting</div><p>AI scores customer segments before any email is sent.</p></div><div class="card"><div class="big">Personal</div><div class="ft">Every email researched</div><p>Each message speaks to the lead's own business.</p></div><div class="card"><div class="big">Pay per email</div><div class="ft">No subscription</div><p>Start small, scale when it works.</p></div></div></div></section>
+
+<section id="proof"><div class="w"><h2>Who it's for</h2><p class="sub">Built for teams that sell to other businesses.</p>
+<div class="g3"><div class="card"><div class="ft">Solo founders</div><p>Outreach without hiring a sales team.</p></div><div class="card"><div class="ft">Agencies &amp; consultants</div><p>Fill your pipeline with fitting clients.</p></div><div class="card"><div class="ft">SaaS &amp; service teams</div><p>Test new segments quickly and cheaply.</p></div></div></div></section>
+
+<section id="pricing"><div class="w"><h2>Pay as you go, no subscription</h2><p class="sub">Move the slider to estimate your budget.</p>
+<div class="card price"><div class="big" id="pr">$30</div><div id="pe">750 emails</div><input id="sl" type="range" min="250" max="5000" step="250" value="750" aria-label="Emails"><div class="pg"><div><b id="pl">2–6</b><span>Est. warm leads</span></div><div><b id="pm">~1</b><span>Est. meetings</span></div><div><b>$0.04</b><span>Per email</span></div></div><a class='btn' href='#signup'>Start free trial</a><p class="note">Estimates only. Results vary by offer, market and message.</p></div></div></section>
+
+<section id="faq"><div class="w"><h2>Common questions</h2><p class="sub"></p>
+<details><summary>How does it work?</summary><p>Give the agent your website. It learns your offer, finds likely buyers, writes personal emails, follows up and sends your booking link to interested leads.</p></details>
+<details><summary>Will it work for my business?</summary><p>If you sell to other businesses, yes. Run the free preview above to see who it would contact.</p></details>
+<details><summary>Will emails land in spam?</summary><p>Emails send from pre-warmed mailboxes with SPF, DKIM and DMARC, not from your own domain. Mailboxes with high bounces are paused.</p></details>
+<details><summary>Where do leads come from?</summary><p>From a verified business database. You can also upload your own CSV.</p></details>
+<details><summary>How much does it cost?</summary><p>Finding leads is free. You pay about $0.04 per email sent, within a daily budget you control.</p></details>
+<details><summary>Which countries and languages are supported?</summary><p>Any country, with emails written in the lead's language where supported.</p></details>
+</div></section>
+
+<div class="w"><div class="cta"><h2>You've heard it all before. This one is different.</h2><p>Get $30 in free credits to try it.</p><a class="btn" href="#top">Find my leads</a></div>
+<footer><span>© 2026 Infofitsserve Consultant Services. All rights reserved. Reachly is a product of Infofitsserve Consultant Services.</span><span><a href='#terms' style='color:inherit'>Terms of Service</a> · <a href='#privacy' style='color:inherit'>Privacy Policy</a> · <a href='#faq' style='color:inherit'>FAQ</a> · <a href='#login' style='color:inherit'>Client Login</a></span></footer></div>
+</main>
+<div id='views'></div><div class='stick'><a class='btn' href='#signup'>Start free trial</a></div>
+
+<script>
+const $=id=>document.getElementById(id);
+
+const STEPS=['Reading your website','Studying competitors','Scoring customer segments','Matching verified decision makers','Writing a personal email'];
+const SEG=[['Founders of small businesses',91],['Marketing agencies',84],['Local service providers',78],['E-commerce brands',72],['Consultants',66]];
+$('nosite').onclick=e=>{e.preventDefault();$('dom').value='mybusiness.com';$('fm').requestSubmit()};
+$('fm').onsubmit=e=>{e.preventDefault();let d=$('dom').value.trim().replace(/^https?:\/\//,'').replace(/\/.*$/,'');if(!d)return;
+$('dn').textContent=d;$('demo').classList.add('on');$('res').classList.remove('on');
+$('steps').innerHTML=STEPS.map(s=>`<div class="st">${s}…</div>`).join('');
+const co=d.split('.')[0].replace(/^./,c=>c.toUpperCase());
+$('fit').innerHTML='<tr><th>Segment</th><th>Fit</th><th></th></tr>'+SEG.map(s=>`<tr><td>${s[0]}</td><td>${s[1]}%</td><td><div class="meter"><i style="width:${s[1]}%"></i></div></td></tr>`).join('');
+$('em').textContent=`Subject: ${co} x quick idea\n\nHi there,\n\nI noticed your team has been growing and thought ${d} might help save hours each week. Companies like yours usually see value fast.\n\nWould a short walkthrough this week be useful?\n\nBest,\n[Your name]`;
+document.querySelectorAll('.st').forEach((s,i)=>setTimeout(()=>{s.classList.add('d');if(i==STEPS.length-1)$('res').classList.add('on')},500*(i+1)));
+$('demo').scrollIntoView({behavior:'smooth',block:'nearest'})};
+$('lead').onsubmit=e=>{e.preventDefault();try{localStorage.setItem('reachly_email',$('em2').value)}catch(x){}
+$('ok').textContent='Thanks! Connect this form to your email tool or backend to capture leads.'};
+const sl=$('sl');sl.oninput=()=>{const n=+sl.value;$('pr').textContent='$'+Math.round(n*.04);$('pe').textContent=n.toLocaleString()+' emails';$('pl').textContent=Math.max(1,Math.round(n*.003))+'–'+Math.round(n*.008);$('pm').textContent='~'+Math.max(1,Math.round(n/750))};
+const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const setS=h=>{$('steps').innerHTML=h};
+$('fm').onsubmit=async e=>{e.preventDefault();const d=$('dom').value.trim().replace(/^https?:\/\//,'').replace(/\/.*$/,'');if(!d)return;
+$('dn').textContent=d;$('demo').classList.add('on');$('res').classList.remove('on');setS('<div class="st d">Agent is analysing '+esc(d)+'…</div>');
+let s=null;try{s=await claude.use('sample')}catch(x){}
+if(!s){setS('<div class="st d">Live AI preview is not available in this view.</div>');return}
+$('go').disabled=true;
+try{const r=await s.json('You are a B2B outreach strategist. Business website domain: '+d+'. Owner description: '+($('desc').value.trim()||'(none given; infer cautiously from the domain name and state assumptions)')+'. Return ONLY JSON: {"summary":"one sentence on what they likely sell","segments":[{"name":"buyer segment","fit":0-100 integer}] (exactly 5, sorted by fit),"email":{"subject":"...","body":"under 90 words, friendly, specific, one clear ask, signed [Your name]"}}. Do not invent facts, statistics or named people.');
+setS('<div class="st d">'+esc(r.summary)+'</div>');
+$('fit').innerHTML='<tr><th>Segment</th><th>Fit</th><th></th></tr>'+r.segments.map(x=>'<tr><td>'+esc(x.name)+'</td><td>'+esc(x.fit)+'%</td><td><div class="meter"><i style="width:'+Math.max(0,Math.min(100,+x.fit||0))+'%"></i></div></td></tr>').join('');
+$('em').textContent='Subject: '+r.email.subject+'\n\n'+r.email.body;$('res').classList.add('on');
+}catch(x){setS('<div class="st d">'+(x&&x.code==='not_granted'?'Permission to run the AI preview was declined.':x&&x.code==='rate_limited'?'Too many requests. Please wait a moment.':'Preview failed. Please try again.')+'</div>')}
+$('go').disabled=false};
+$('lead').onsubmit=async e=>{e.preventDefault();const em=$('em2').value.trim();let ok=false;
+try{const db=await claude.use('db'),us=await claude.use('user');if(db&&us){await db.collection('leads').doc(await us.id()).set({email:em,domain:$('dom').value.trim(),desc:$('desc').value.trim(),at:new Date().toISOString()});ok=true}}catch(x){}
+try{localStorage.setItem('reachly_email',em)}catch(x){}
+$('ok').textContent=ok?"You're on the list. We'll be in touch.":'Could not reach the sign-up list. Please sign in and try again.'};
+let CAMP=null,TS=[],CV=false;
+const cp=t=>{try{navigator.clipboard.writeText(t)}catch(x){}};
+const J=async(p)=>{const s=await claude.use('sample');if(!s)throw{code:'na'};return s.json(p)};
+const er=x=>x&&x.code==='not_granted'?'Permission to run the AI was declined.':x&&x.code==='rate_limited'?'Too many requests. Please wait a moment.':x&&x.code==='na'?'AI is not available in this view.':'Something went wrong. Please try again.';
+function trk(){const el=$('trk');if(!el)return;el.innerHTML=CAMP.emails.map((m,i)=>'<span class="tg '+(CV&&!TS[i]?'x':TS[i]?'on':'')+'">Day '+esc(m.day)+(TS[i]?' ✓':'')+'</span>').join('')+(CV?'<b>Converted: sequence stopped</b>':'')}
+function draw(){const c=CAMP;let h='<div class="col"><div class="card"><div class="ft">1. Who to contact</div><p>'+esc(c.summary)+'</p><table>'+c.profiles.map(p=>'<tr><td><b>'+esc(p.who)+'</b><br><small>'+esc(p.why)+'</small></td><td><small>'+esc(p.find)+'</small></td></tr>').join('')+'</table><p class="warn">These are buyer profiles and search filters, not a purchased list. Find real contacts with tools such as LinkedIn, Google Maps or your own customer data.</p></div>';
+h+='<div class="card"><div class="ft">2. Email sequence until converted</div><p>Each email goes only to people who have not replied, booked or unsubscribed.</p><div class="tl" id="trk"></div><div class="tl"><button class="btn o sm" id="nx" type="button">Mark next email sent</button><button class="btn sm" id="cvb" type="button">Lead converted: stop sequence</button><button class="btn o sm" id="cpe" type="button">Copy all emails</button></div>'+c.emails.map(m=>'<div class="card" style="margin-top:10px"><span class="tg">Day '+esc(m.day)+'</span> <b>'+esc(m.subject)+'</b><div class="mail">'+esc(m.body)+'</div></div>').join('')+'</div>';
+const k=c.call;h+='<div class="card"><div class="ft">3. AI sales-call script</div><div class="mail">'+esc('Opening: '+k.opening+'\n\nDiscovery:\n- '+k.discovery.join('\n- ')+'\n\nPitch: '+k.pitch+'\n\nObjections:\n'+k.objections.map(o=>'"'+o.o+'" -> '+o.r).join('\n')+'\n\nClose: '+k.close)+'</div><div class="tl"><button class="btn sm" id="sc" type="button">Simulate an AI sales call</button><button class="btn o sm" id="cps" type="button">Copy script</button></div><div id="cl"></div></div></div>';
+$('co').innerHTML=h;trk();
+$('nx').onclick=()=>{const i=TS.findIndex(x=>!x);if(i>=0&&!CV){TS[i]=true;trk()}};
+$('cvb').onclick=()=>{CV=true;trk()};
+$('cpe').onclick=()=>cp(c.emails.map(m=>'Day '+m.day+' | '+m.subject+'\n'+m.body).join('\n\n---\n\n'));
+$('cps').onclick=()=>cp(JSON.stringify(k,null,2));
+$('sc').onclick=async()=>{const b=$('sc');b.disabled=true;$('cl').innerHTML='<p class="note">Simulating call…</p>';
+try{const r=await J('Write a realistic simulated sales phone call between an AI sales agent and a prospect. Product: '+CAMP.product+'. Buyer profile: '+c.profiles[0].who+'. Script: '+JSON.stringify(k)+'. Rules: the agent states at the start that it is an AI assistant calling for the business, asks permission to continue, listens, handles one real objection, and respects a no. 8 to 12 turns. Return ONLY JSON {"turns":[{"who":"Agent or Prospect","text":"..."}],"outcome":"Demo booked, Needs follow-up, or Declined","next":"what the follow-up email should do next"}. Do not invent real people, companies or statistics.');
+$('cl').innerHTML='<p class="note"><b>Simulation only.</b> No real call was placed.</p><div class="tr">'+r.turns.map(t=>'<div class="'+(t.who==='Agent'?'':'p')+'"><b>'+esc(t.who)+':</b> '+esc(t.text)+'</div>').join('')+'</div><p><b>Outcome:</b> '+esc(r.outcome)+'. <b>Next:</b> '+esc(r.next)+'</p>'}catch(x){$('cl').innerHTML='<p class="note">'+er(x)+'</p>'}b.disabled=false}}
+$('bc').onclick=async()=>{const p=$('sp').value.trim(),d=$('sd').value.trim();if(!p||!d){$('co').innerHTML='<p class="note">Please add a product name and description.</p>';return}
+$('bc').disabled=true;$('co').innerHTML='<p class="note">Building your campaign…</p>';CV=false;
+try{CAMP=await J('You are a sales strategist. Product: '+p+'. Details: '+d+'. Booking link: '+($('bk').value.trim()||'[your link]')+'. Return ONLY JSON {"summary":"one sentence ideal customer","profiles":[{"who":"buyer type and job title","why":"why they fit","find":"exact search filters and where to find them"}] with exactly 5 items,"emails":[{"day":0,"subject":"","body":""}] with 5 emails on days 0,2,5,9,14, each under 90 words, using {{first_name}} and {{company}}, each adding new value, the last a polite break-up, all with an unsubscribe line,"call":{"opening":"starts by saying it is an AI assistant and asking permission","discovery":["3 questions"],"pitch":"","objections":[{"o":"","r":""}] with 3 items,"close":""}}. Never invent statistics, testimonials, named people or companies. Write in simple, honest language.');CAMP.product=p+' - '+d;TS=CAMP.emails.map(()=>false);draw()}catch(x){$('co').innerHTML='<p class="note">'+er(x)+'</p>'}$('bc').disabled=false};
+if(!window.claude){window.claude={use:async n=>n==='sample'?{json:async p=>(await api('/api/ai',{prompt:p},gt())).data}:null}}
+const CFG={API:'',TRIAL:7,MAIL:'support@yourdomain.com'};/* API = your backend URL, e.g. https://api.yourdomain.com */
+const gt=()=>{try{return sessionStorage.getItem('tk')}catch(x){return null}};
+const api=async(p,b,t,m)=>{if(!CFG.API)throw{m:'The account server is not connected yet. Set CFG.API to your backend URL.'};const r=await fetch(CFG.API+p,{method:m||'POST',headers:{'Content-Type':'application/json',...(t?{Authorization:'Bearer '+t}:{})},body:m==='GET'?undefined:JSON.stringify(b||{})});const j=await r.json().catch(()=>({}));if(!r.ok)throw{m:j.error||'Request failed'};return j};
+const pg=(t,b)=>`<div class='w' style='padding:48px 20px;max-width:780px'><a href='#top' class='note'>&larr; Back to home</a><h2 style='text-align:left;margin:14px 0 20px'>${t}</h2>${b}</div>`;
+const LG=a=>a.map(([h,t])=>`<h3 style='font-size:19px;margin:22px 0 6px'>${h}</h3><p style='color:var(--mut);margin:0'>${t}</p>`).join('');
+const CO='Infofitsserve Consultant Services';
+const V={
+terms:()=>pg('Terms of Service',`<p class='note'>Last updated: 21 November 2026. Template for review by your legal advisor before launch.</p>`+LG([['1. Acceptance',`By creating an account or using Reachly you agree to these Terms. Reachly is provided by ${CO} (registered address: [add address]).`],['2. The service','Reachly provides AI-assisted tools to plan outreach, draft emails and call scripts, and manage advertising campaigns. AI output can be inaccurate, so you must review it before use.'],['3. Accounts and OTP security','You must give accurate details and keep your login and one-time passwords confidential. You are responsible for activity on your account.'],['4. Free trial and subscriptions',`New accounts get a ${CFG.TRIAL}-day free trial. After the trial, continued use needs a paid plan, billed through our payment partner PayU. Prices are shown before you pay and include or exclude GST as displayed. You can stop renewing at any time from your dashboard.`],['5. Refunds','Refund terms: [add your policy, for example no refund after a billing period starts unless required by law].'],['6. Acceptable use','You must not send spam, contact people without a lawful basis or consent, ignore do-not-call or unsubscribe requests, run deceptive or illegal ads, or break the rules of any connected platform.'],['7. Third-party platforms','Connecting Meta, Google, LinkedIn, X or other platforms is subject to their terms. We are not responsible for ad-account restrictions imposed by them.'],['8. Advertising spend and results','You pay ad spend directly to the platforms. We do not guarantee leads, sales, rankings or any result.'],['9. Intellectual property',`The Reachly software, design and brand are © 2026 ${CO}. You keep ownership of the content and data you provide.`],['10. Liability','To the extent permitted by law, our total liability is limited to the fees you paid in the 3 months before the claim. We are not liable for indirect or consequential loss.'],['11. Termination','You may close your account at any time. We may suspend accounts that breach these Terms.'],['12. Governing law','These Terms are governed by the laws of India. Courts at [city, state] have jurisdiction.'],['13. Contact',`${CFG.MAIL}`]])),
+privacy:()=>pg('Privacy Policy',`<p class='note'>Last updated: 21 November 2026. Template for review by your legal advisor, including DPDP Act 2023 compliance.</p>`+LG([['Who we are',`${CO} is the data fiduciary for information collected through Reachly.`],['What we collect','Name, company, email, mobile number, login and OTP records, billing status, content you submit, campaign data and connected ad-account tokens.'],['How we use it','To create and secure your account, deliver the service, run campaigns you approve, process payments, send service messages, prevent abuse and meet legal duties.'],['Payments','Payments are processed by PayU. We do not store your card or UPI details.'],['Social and ad platforms','When you connect a platform we store access tokens securely and use them only to perform actions you authorise. You can disconnect at any time.'],['AI processing','Content you provide may be processed by AI service providers to generate drafts and plans. We do not sell your data.'],['Sharing','Only with service providers needed to run Reachly (hosting, SMS or email delivery, payments, AI) and where law requires.'],['Retention and security','We keep data while your account is active and as the law requires. We use encryption in transit and access controls, but no system is perfectly secure.'],['Your rights','You may request access, correction or erasure of your data, withdraw consent, and raise a grievance.'],['Grievance officer',`Name: [add]. Email: ${CFG.MAIL}. Address: [add].`],['Changes','We will post updates on this page and notify you of material changes.']])),
+faq:()=>pg('Frequently Asked Questions',[['What is Reachly?','An AI agent that plans your outreach, drafts personalised emails and call scripts, and helps run ads from one dashboard.'],['How does the free trial work?',`Sign up with an OTP. You get ${CFG.TRIAL} days of access. After that you choose a plan to continue.`],['How do I pay?','Through PayU using cards, UPI, net banking and wallets.'],['Can I cancel?','Yes. Stop renewing from your dashboard.'],['Which platforms can I connect?','Meta (Facebook and Instagram), Google Ads, LinkedIn, X and others as they are added. Each needs your permission.'],['Does the AI contact people automatically?','Only inside rules you approve. You are responsible for consent, unsubscribe links and do-not-call compliance.'],['Do you guarantee results?','No. Results depend on your offer, audience and budget.'],['How do I get support?',`Email ${CFG.MAIL}.`]].map(([q,a])=>`<details><summary>${q}</summary><p>${a}</p></details>`).join('')),
+login:()=>auth('login'),signup:()=>auth('signup'),dashboard:dash};
+function auth(m){const s=m==='signup';return pg(s?`Start your ${CFG.TRIAL}-day free trial`:'Client login',`<div class='card' style='max-width:460px'><div class='col' style='margin:0'>${s?`<input class='in' id='an' placeholder='Full name' autocomplete='name'><input class='in' id='ac' placeholder='Company name' autocomplete='organization'>`:''}<input class='in' id='ae' type='email' placeholder='Email address' autocomplete='email'>${s?`<input class='in' id='ap' type='tel' placeholder='Mobile number' autocomplete='tel'><label style='font-size:13px'><input type='checkbox' id='at'> I agree to the <a href='#terms'>Terms of Service</a> and <a href='#privacy'>Privacy Policy</a></label>`:''}<button class='btn' type='button' onclick="sendOtp('${m}')">Send OTP</button><div id='ov' style='display:none'><input class='in' id='ao' inputmode='numeric' maxlength='6' placeholder='6-digit OTP' style='width:100%'><button class='btn' type='button' style='margin-top:10px' onclick="verOtp('${m}')">Verify and continue</button></div><p class='note' id='am'></p></div></div><p class='note'>${s?`Have an account? <a href='#login'>Log in</a>`:`New here? <a href='#signup'>Start free trial</a>`}</p>`)}
+const am=(t,ok)=>{const e=$('am');e.style.color=ok?'var(--ac)':'#c0392b';e.textContent=t};
+async function sendOtp(m){const e=$('ae').value.trim();if(!/^\S+@\S+\.\S+$/.test(e))return am('Enter a valid email address.');if(m==='signup'&&(!$('an').value.trim()||!$('at').checked))return am('Please add your name and accept the Terms and Privacy Policy.');try{await api('/api/otp/send',{mode:m,identifier:e,name:$('an')?.value.trim(),company:$('ac')?.value.trim(),mobile:$('ap')?.value.trim()});$('ov').style.display='block';am('OTP sent. It expires in 10 minutes.',1)}catch(x){am(x.m||'Could not send OTP.')}}
+async function verOtp(m){try{const j=await api('/api/otp/verify',{mode:m,identifier:$('ae').value.trim(),otp:$('ao').value.trim()});try{sessionStorage.setItem('tk',j.token)}catch(x){}location.hash='dashboard'}catch(x){am(x.m||'Verification failed.')}}
+async function pay(p){try{const j=await api('/api/payu/initiate',{plan:p},gt());const f=document.createElement('form');f.method='POST';f.action=j.action;Object.entries(j.fields).forEach(([k,v])=>{const i=document.createElement('input');i.type='hidden';i.name=k;i.value=v;f.appendChild(i)});document.body.appendChild(f);f.submit()}catch(x){alert(x.m)}}
+async function conn(p){try{const j=await api('/api/oauth/'+p+'/start',{},gt());location.href=j.url}catch(x){alert(x.m)}}
+function out(){try{sessionStorage.removeItem('tk')}catch(x){}location.hash='login'}
+async function dash(){const t=gt();if(!t)return pg('Client dashboard',`<p>Please <a href='#login'>log in</a> to continue.</p>`);let me;try{me=await api('/api/me',null,t,'GET')}catch(x){return pg('Client dashboard',`<p class='warn'>${esc(x.m)}</p><p><a href='#login'>Log in again</a></p>`)}
+const d=n=>new Date(n).toLocaleDateString('en-IN');const st=me.status==='active'?`Active until ${d(me.paidUntil)}`:me.status==='trial'?`Free trial ends ${d(me.trialEnds)}`:'Trial ended. Choose a plan to continue.';
+const PL=(me.plans||[]).map(p=>`<div class='card'><div class='ft'>${esc(p.name)}</div><div class='big' style='font-size:30px'>&#8377;${esc(p.price)}<small style='font-size:14px'>/mo</small></div><button class='btn sm' type='button' onclick="pay('${esc(p.name)}')">Subscribe with PayU</button></div>`).join('');
+const PF=['Meta (Facebook and Instagram)','Google Ads','LinkedIn','X (Twitter)','YouTube','TikTok'];const cn=me.connected||[];
+return pg(`Welcome, ${esc(me.name||'client')}`,`<div class='card'><div class='ft'>Subscription</div><p>${st}</p><div class='g3' style='margin-top:12px'>${PL}</div></div><div class='card' style='margin-top:16px'><div class='ft'>AI agent</div><p>Build buyer profiles, email follow-ups and call scripts.</p><a class='btn sm' href='#studio' style='margin-top:10px'>Open Campaign Studio</a></div><div class='card' style='margin-top:16px'><div class='ft'>Connect ad accounts</div><div class='tl'>${PF.map(p=>`<button class='btn o sm' type='button' onclick="conn('${esc(p)}')">${cn.includes(p)?'&#10003; ':''}${esc(p)}</button>`).join('')}</div></div><div class='card' style='margin-top:16px'><div class='ft'>Campaigns</div><p>${(me.campaigns||[]).length?'':'No campaigns yet.'}</p></div><p style='margin-top:16px'><button class='btn o sm' type='button' onclick='out()'>Log out</button></p>`)}
+async function route(){const h=location.hash.slice(1),v=$('views'),m=document.querySelector('main');if(V[h]){m.hidden=true;v.innerHTML=await V[h]();window.scrollTo(0,0)}else{m.hidden=false;v.innerHTML=''}}
+addEventListener('hashchange',route);route();
+</script></body></html>

@@ -1,0 +1,26 @@
+name: Deploy API (Google Cloud Run)
+on:
+  push: { branches: [main], paths: ['server/**'] }
+  workflow_dispatch: {}
+permissions: { contents: read, id-token: write }
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: google-github-actions/auth@v2
+        with:
+          workload_identity_provider: ${{ secrets.GCP_WIF_PROVIDER }}
+          service_account: ${{ secrets.GCP_SA }}
+      - uses: google-github-actions/deploy-cloudrun@v2
+        with:
+          service: reachly-api
+          region: asia-south1
+          source: ./server
+          flags: --allow-unauthenticated
+          env_vars: SITE_URL=${{ vars.SITE_URL }},API_URL=${{ vars.API_URL }},PAYU_URL=https://secure.payu.in/_payment
+          secrets: |
+            PAYU_KEY=PAYU_KEY:latest
+            PAYU_SALT=PAYU_SALT:latest
+            JWT_SECRET=JWT_SECRET:latest
+            ANTHROPIC_API_KEY=ANTHROPIC_API_KEY:latest
